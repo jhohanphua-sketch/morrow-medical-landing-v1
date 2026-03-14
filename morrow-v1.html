@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MORROW Insights — Measure your healthspan. Guide what comes next.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:       #F4EFE6;
+  --cream-dark:  #EDE7DC;
+  --white:       #FAFAF7;
+  --teal:        #00B5AD;
+  --teal-dark:   #007A76;
+  --teal-deep:   #1C6B68;
+  --ink:         #1A1A1A;
+  --ink-mid:     #3A3A3A;
+  --muted:       #7A7A74;
+  --border:      #DDD8CE;
+  --border-light:#E8E3DA;
+  --amber:       #B8860B;
+  --r:           10px;
+  --r-lg:        18px;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 40px;
+  background: rgba(244,239,230,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-light);
+  transition: box-shadow .3s;
+}
+.nav-logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.06em; color: var(--ink); text-decoration: none;
+}
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-link {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  transition: color .2s;
+}
+.nav-link:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--teal-deep); color: var(--white);
+  padding: 9px 20px; border-radius: 50px;
+  font-size: 13px; font-weight: 500;
+  text-decoration: none; transition: background .2s, transform .15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--teal); transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 0;
+  padding-top: 72px;
+  padding-bottom: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 40px; padding-right: 40px;
+  align-items: center;
+}
+.hero-left { padding: 60px 60px 60px 0; }
+
+.overline {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--teal-dark);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.overline::before {
+  content: ''; display: block;
+  width: 28px; height: 1px; background: var(--teal);
+}
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(40px, 5vw, 58px);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--ink);
+  margin-bottom: 24px;
+  letter-spacing: -0.3px;
+}
+.hero h1 em { font-style: italic; color: var(--teal-dark); }
+
+.hero-desc {
+  font-size: 16px; color: var(--ink-mid);
+  line-height: 1.75; font-weight: 300;
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+
+.hero-stats {
+  display: flex; align-items: center; gap: 28px;
+  margin-bottom: 36px;
+}
+.hs { }
+.hs-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px; color: var(--ink); line-height: 1;
+}
+.hs-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.12em;
+  margin-top: 3px;
+}
+.hs-div { width: 1px; height: 36px; background: var(--border); }
+
+.hero-ctas { display: flex; align-items: center; gap: 16px; }
+.btn-primary {
+  background: var(--teal-deep); color: var(--white);
+  padding: 14px 28px; border-radius: 50px;
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; transition: all .2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--teal); transform: translateY(-1px); }
+.hero-price {
+  font-size: 13px; color: var(--muted);
+}
+.hero-price strong { color: var(--ink-mid); font-weight: 500; }
+
+/* ─── HERO CARD ─── */
+.hero-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  align-self: center;
+  position: sticky; top: 90px;
+}
+.hc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--teal-dark);
+  margin-bottom: 14px;
+}
+.hc-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px; color: var(--ink); margin-bottom: 4px;
+}
+.hc-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.hc-list { list-style: none; }
+.hc-list li {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+}
+.hc-list li:last-child { border-bottom: none; }
+.hc-list .hli { color: var(--ink-mid); }
+.hc-list .hlv { color: var(--teal-dark); font-family: 'DM Mono', monospace; font-size: 12px; }
+.hc-sep { height: 1px; background: var(--border); margin: 18px 0; }
+.hc-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.hc-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 44px; color: var(--ink); line-height: 1;
+}
+.hc-price-note { font-size: 13px; color: var(--muted); }
+.hc-caveat { font-size: 11px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.hc-btn {
+  display: block; background: var(--teal-deep); color: var(--white);
+  padding: 13px; border-radius: 50px; font-size: 14px; font-weight: 500;
+  text-align: center; text-decoration: none;
+  transition: background .2s;
+}
+.hc-btn:hover { background: var(--teal); }
+.hc-trust {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  text-align: center; margin-top: 10px; letter-spacing: 0.04em;
+}
+
+/* ─── SECTION WRAPPER ─── */
+.section { padding: 88px 40px; }
+.wrap { max-width: 1200px; margin: 0 auto; }
+.section-cream { background: var(--cream); }
+.section-white { background: var(--white); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+.section-teal { background: var(--teal-deep); }
+
+.s-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--teal-dark);
+  margin-bottom: 14px;
+}
+.s-tag-light { color: rgba(0,181,173,0.7); }
+h2.serif {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 400; line-height: 1.12;
+  color: var(--ink); margin-bottom: 14px;
+}
+h2.serif-light { color: var(--white); }
+.intro-text {
+  font-size: 15px; color: var(--muted);
+  font-weight: 300; max-width: 520px;
+  line-height: 1.8; margin-bottom: 52px;
+}
+.intro-text-light { color: rgba(255,255,255,0.65); }
+
+/* ─── WHAT IS IT ─── */
+.what-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+  align-items: start;
+}
+.what-left p {
+  font-size: 15px; color: var(--ink-mid);
+  line-height: 1.8; font-weight: 300; margin-bottom: 16px;
+}
+.what-left p:last-child { margin-bottom: 0; }
+.what-left .legal-note {
+  font-size: 11px; color: var(--muted);
+  margin-top: 20px; padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  line-height: 1.6;
+}
+/* compare-table removed — §3.3(c) comparative claims not permitted */
+
+/* ─── HOW IT WORKS ─── */
+.steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.step-card {
+  background: var(--white);
+  padding: 36px 32px;
+  position: relative;
+}
+.step-card:first-child { border-radius: var(--r-lg) 0 0 var(--r-lg); }
+.step-card:last-child { border-radius: 0 var(--r-lg) var(--r-lg) 0; }
+.step-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 52px; color: var(--border); line-height: 1;
+  margin-bottom: 18px;
+}
+.step-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--teal-dark);
+  margin-bottom: 8px;
+}
+.step-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; font-weight: 400;
+  color: var(--ink); margin-bottom: 10px;
+}
+.step-card p { font-size: 13px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+.step-note {
+  font-size: 11px; color: var(--muted);
+  border-top: 1px solid var(--border-light);
+  margin-top: 14px; padding-top: 12px;
+  line-height: 1.6;
+}
+
+/* ─── WHAT YOU MEASURE ─── */
+.domains-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.domain-card {
+  background: var(--white); border: 1px solid var(--border-light);
+  border-radius: var(--r-lg); padding: 28px;
+  transition: border-color .2s, transform .2s;
+  cursor: default;
+}
+.domain-card:hover { border-color: var(--teal); transform: translateY(-2px); }
+.domain-icon {
+  font-size: 22px; margin-bottom: 14px;
+  display: block;
+  width: 44px; height: 44px; line-height: 44px; text-align: center;
+  background: rgba(0,181,173,0.08); border-radius: 10px;
+}
+.domain-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--teal-dark); margin-bottom: 8px;
+}
+.domain-card h4 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 8px;
+}
+.domain-card p { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+.domain-tests {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: var(--teal-dark);
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* ─── BLOOD PANEL ACCORDION ─── */
+.acc { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+.acc-item { border-bottom: 1px solid var(--border-light); }
+.acc-item:last-child { border-bottom: none; }
+.acc-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; cursor: pointer;
+  transition: background .15s;
+}
+.acc-q:hover { background: var(--cream-dark); }
+.acc-q-left { display: flex; align-items: center; gap: 12px; }
+.acc-q-label { font-size: 14px; font-weight: 500; color: var(--ink); }
+.acc-q-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--teal-dark);
+  background: rgba(0,181,173,0.1);
+  padding: 2px 8px; border-radius: 4px;
+}
+.acc-chevron { color: var(--muted); transition: transform .2s; flex-shrink: 0; }
+.acc-item.open .acc-chevron { transform: rotate(180deg); }
+.acc-body { display: none; padding: 0 20px 18px; }
+.acc-item.open .acc-body { display: block; }
+.marker-list { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.marker-list li {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: var(--ink-mid);
+  background: var(--cream-dark);
+  padding: 4px 10px; border-radius: 4px;
+}
+.acc-cite { font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+/* ─── BLOOD PANEL SECTION ─── */
+.blood-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+
+/* ─── SOCIAL PROOF ─── */
+.proof-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.proof-card {
+  background: var(--cream-dark); border-radius: var(--r-lg);
+  padding: 28px; border: 1px solid var(--border-light);
+}
+.proof-stars { color: var(--teal-dark); font-size: 14px; letter-spacing: 3px; margin-bottom: 12px; }
+.proof-quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: 15px; font-style: italic;
+  color: var(--ink-mid); line-height: 1.7;
+  margin-bottom: 16px;
+}
+.proof-author { font-size: 12px; color: var(--muted); }
+.proof-author strong { color: var(--ink-mid); display: block; font-weight: 500; margin-bottom: 2px; }
+
+/* ─── PRICING ─── */
+.price-layout { display: grid; grid-template-columns: 1fr 440px; gap: 72px; align-items: start; }
+.price-left h2 { margin-bottom: 14px; }
+.price-left p { font-size: 15px; color: var(--ink-mid); line-height: 1.8; font-weight: 300; margin-bottom: 24px; }
+.price-points { list-style: none; margin-bottom: 32px; }
+.price-points li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; color: var(--ink-mid);
+  padding: 8px 0; border-bottom: 1px solid var(--border-light);
+  font-weight: 300;
+}
+.price-points li:last-child { border-bottom: none; }
+.pp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 7px; }
+
+.big-card {
+  background: var(--teal-deep); border-radius: var(--r-lg);
+  padding: 40px; color: var(--white);
+  position: sticky; top: 90px;
+}
+.big-card .bc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(0,181,173,0.8);
+  margin-bottom: 12px;
+}
+.big-card .bc-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 64px; color: var(--white); line-height: 1; margin-bottom: 4px;
+}
+.big-card .bc-gst { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+.bc-rows { margin-bottom: 24px; }
+.bc-row {
+  display: flex; justify-content: space-between;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+}
+.bc-row:last-child { border-bottom: none; }
+.bc-rl { color: rgba(255,255,255,0.55); }
+.bc-rv { color: rgba(0,181,173,0.9); font-family: 'DM Mono', monospace; font-size: 12px; }
+.bc-btn {
+  display: block; background: var(--white); color: var(--teal-deep);
+  padding: 14px; border-radius: 50px;
+  font-size: 15px; font-weight: 500; text-align: center;
+  text-decoration: none; transition: all .2s;
+}
+.bc-btn:hover { background: var(--cream); }
+.bc-small {
+  font-size: 11px; color: rgba(255,255,255,0.4);
+  text-align: center; margin-top: 10px; line-height: 1.6;
+}
+.permit-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; color: rgba(255,255,255,0.3);
+  text-align: center; margin-top: 6px; letter-spacing: 0.04em;
+}
+
+/* ─── ADD-ONS ─── */
+.addons-header { text-align: center; margin-bottom: 40px; }
+.addons-toggle-btn {
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); padding: 11px 24px; border-radius: 50px;
+  font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all .2s; margin-top: 14px;
+}
+.addons-toggle-btn:hover { border-color: var(--teal); color: var(--teal-dark); }
+.addons-body { display: none; }
+.addons-body.open { display: block; }
+.addon-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.addon-card {
+  background: var(--white); border: 1px solid var(--border-light);
+  border-radius: var(--r); padding: 24px;
+}
+.addon-name { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.addon-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px; color: var(--ink); margin-bottom: 4px;
+}
+.addon-consult {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--teal-dark); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.addon-desc { font-size: 12px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+.cancer-warning {
+  background: rgba(184,134,11,0.07); border: 1px solid rgba(184,134,11,0.25);
+  border-radius: 6px; padding: 10px 14px;
+  font-size: 11px; color: var(--amber); line-height: 1.6; margin-top: 10px;
+}
+
+/* ─── TEAM ─── */
+.team-intro-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+.team-cards { display: flex; flex-direction: column; gap: 14px; }
+.team-card {
+  background: var(--cream-dark); border: 1px solid var(--border-light);
+  border-radius: var(--r-lg); padding: 22px 24px;
+  display: flex; gap: 18px; align-items: center;
+}
+.team-avatar {
+  width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+  background: var(--teal-deep); display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px; font-style: italic; color: var(--white);
+}
+.team-card h4 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+.team-card p { font-size: 12px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+/* ─── FAQ ─── */
+.faq-layout { display: grid; grid-template-columns: 300px 1fr; gap: 72px; }
+.faq-left h2 { margin-bottom: 12px; }
+.faq-left p { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+.faq-left a { color: var(--teal-dark); text-decoration: none; }
+.faq-item { border-bottom: 1px solid var(--border-light); }
+.faq-item:first-child { border-top: 1px solid var(--border-light); }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; cursor: pointer;
+  font-size: 14px; font-weight: 500; color: var(--ink); gap: 16px;
+  transition: color .15s;
+}
+.faq-q:hover { color: var(--teal-dark); }
+.faq-item.open .faq-q { color: var(--teal-dark); }
+.faq-a {
+  font-size: 13px; color: var(--muted); padding: 0 0 18px;
+  line-height: 1.8; font-weight: 300; display: none;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-chev { transition: transform .2s; flex-shrink: 0; }
+.faq-item.open .faq-chev { transform: rotate(45deg); }
+
+/* ─── FINAL CTA ─── */
+.final-inner {
+  display: flex; justify-content: space-between; align-items: center; gap: 48px;
+}
+.final-inner h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px,4vw,48px); font-weight: 400;
+  color: var(--white); line-height: 1.15;
+}
+.final-inner h2 em { font-style: italic; opacity: .65; }
+.final-cta-col { flex-shrink: 0; text-align: center; }
+.final-cta-col .btn-white {
+  display: inline-block; background: var(--white); color: var(--teal-deep);
+  padding: 16px 36px; border-radius: 50px;
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  transition: all .2s;
+}
+.final-cta-col .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+.final-sub { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 8px; }
+
+/* ─── DISCLAIMER BAR ─── */
+.disclaimer {
+  background: var(--cream-dark); border-top: 1px solid var(--border);
+  padding: 14px 40px;
+}
+.disclaimer p {
+  max-width: 1200px; margin: 0 auto;
+  font-size: 11px; color: var(--muted); line-height: 1.7;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--teal-deep);
+  padding: 52px 40px 36px;
+}
+.footer-in { max-width: 1200px; margin: 0 auto; }
+.footer-grid {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 52px; margin-bottom: 40px;
+}
+.fb-logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px; font-weight: 500; color: var(--white);
+  letter-spacing: 0.06em; margin-bottom: 10px;
+}
+.fb p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.75; }
+.fc h5 {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 14px;
+}
+.fc ul { list-style: none; }
+.fc ul li { padding: 4px 0; }
+.fc ul li a {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  text-decoration: none; transition: color .2s;
+}
+.fc ul li a:hover { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.7;
+}
+
+/* ─── ANIMATE ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-left > * { animation: fadeUp .65s ease both; }
+.overline       { animation-delay: .05s; }
+.hero h1        { animation-delay: .15s; }
+.hero-desc      { animation-delay: .25s; }
+.hero-stats     { animation-delay: .32s; }
+.hero-ctas      { animation-delay: .4s; }
+.hero-card      { animation: fadeUp .65s .25s ease both; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  .nav { padding: 12px 20px; }
+  .nav-link { display: none; }
+  .hero, .what-grid, .blood-grid, .price-layout, .team-intro-grid, .faq-layout, .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero { padding: 90px 20px 40px; gap: 36px; }
+  .hero-left { padding: 0; }
+  .hero-card { position: static; }
+  .section { padding: 64px 20px; }
+  .steps { grid-template-columns: 1fr; gap: 2px; }
+  .step-card:first-child { border-radius: var(--r-lg) var(--r-lg) 0 0; }
+  .step-card:last-child { border-radius: 0 0 var(--r-lg) var(--r-lg); }
+  .domains-grid { grid-template-columns: 1fr; }
+  .proof-grid { grid-template-columns: 1fr; }
+  .addon-grid { grid-template-columns: 1fr; }
+  .final-inner { flex-direction: column; gap: 28px; }
+  .disclaimer, footer { padding-left: 20px; padding-right: 20px; }
+  .footer-grid { gap: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <a href="#" class="nav-logo"><img src="data:image/jpeg;base64,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" alt="MORROW Medical" style="height:28px;width:auto;display:block;"></a>
+  <div class="nav-right">
+    <a href="#how" class="nav-link">Your longevity screening day</a>
+    <a href="#tests" class="nav-link">Longevity tests</a>
+    <a href="#pricing" class="nav-link">Your longevity investment</a>
+    <a href="#pricing" class="nav-cta">Book now — S$599</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div style="background:var(--cream);">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="overline">Longevity health screening · Singapore</div>
+      <h1>How much reserve does<br>your body <em>still have?</em></h1>
+      <p class="hero-desc">Ageing isn't just about disease. It's about the gradual loss of physiological reserve — in your heart, muscles, lungs, and body composition. MORROW Insights measures that reserve directly, so you know where you stand and what to focus on next.</p>
+      <div class="hero-stats">
+        <div class="hs">
+          <div class="hs-num">40+</div>
+          <div class="hs-label">Longevity tests</div>
+        </div>
+        <div class="hs-div"></div>
+        <div class="hs">
+          <div class="hs-num">6</div>
+          <div class="hs-label">Longevity domains</div>
+        </div>
+        <div class="hs-div"></div>
+        <div class="hs">
+          <div class="hs-num">1</div>
+          <div class="hs-label">Visit needed</div>
+        </div>
+      </div>
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn-primary">Book your screening →</a>
+        <span class="hero-price">From <strong>S$599</strong></span>
+      </div>
+    </div>
+
+    <!-- Summary card -->
+    <div class="hero-card">
+      <div class="hc-tag">MORROW Insights — Longevity screening</div>
+      <div class="hc-title">Everything in S$599</div>
+      <div class="hc-sub">One visit · MOH-licensed clinic</div>
+      <ul class="hc-list">
+        <li><span class="hli">VO₂ max (fitness age)</span><span class="hlv">✓</span></li>
+        <li><span class="hli">DEXA body composition scan</span><span class="hlv">✓</span></li>
+        <li><span class="hli">Comprehensive blood panel</span><span class="hlv">✓</span></li>
+        <li><span class="hli">Strength &amp; power tests</span><span class="hlv">✓</span></li>
+        <li><span class="hli">Spirometry + ECG + vitals</span><span class="hlv">✓</span></li>
+        <li><span class="hli">Psychological well-being</span><span class="hlv">✓</span></li>
+        <li><span class="hli">Full results report</span><span class="hlv">✓</span></li>
+        <li><span class="hli">Educational group session</span><span class="hlv">90 min</span></li>
+      </ul>
+      <div class="hc-sep"></div>
+      <div class="hc-price-row">
+        <div class="hc-price">$599</div>
+        
+      </div>
+      <div class="hc-caveat">Singapore residents · Ages 18+ · ~2 hrs 40 min test day</div>
+      <a href="/cdn-cgi/l/email-protection#2e4d4140404b4d5a6e43415c5c4159434b4a474d4f42005d49" class="hc-btn">Book your screening</a>
+      <div class="hc-trust">MOH Licence · L/25M0780/MDS/001/252</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── WHAT IS IT ── -->
+<section class="section section-white">
+  <div class="wrap">
+    <div class="what-grid">
+      <div class="what-left">
+        <div class="s-tag">Singapore's longevity health screening</div>
+        <h2 class="serif">Built to improve your<br><em style="font-style:italic;color:var(--teal-dark);">healthspan.</em></h2>
+        <p>As we age, four things decline in a predictable sequence — cardiovascular fitness, muscle mass, muscle strength and power, and lung function. These aren't just fitness markers. They are the measures of physiological reserve that determine how well and how independently you age.</p>
+        <p>MORROW Insights measures that reserve directly. Not as a one-off check, but as a meaningful baseline designed to guide what to focus on next — and to track how you progress over time.</p>
+        <p style="font-size:14px;color:var(--ink-mid);font-weight:400;line-height:1.75;padding:16px 20px;border-left:3px solid var(--teal);background:rgba(0,181,173,0.05);border-radius:0 var(--r) var(--r) 0;margin-top:8px;">The more reserve you preserve, the better you age. We measure exactly how much you have.</p>
+        <p class="legal-note">MORROW Insights is a health awareness and monitoring service. It does not diagnose, treat, or manage any medical condition.</p>
+      </div>
+      <div>
+        <div style="background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:28px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:18px;">What your longevity screening includes</div>
+          <div style="display:flex;flex-direction:column;gap:0;">
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border-light);">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+              <div style="font-size:14px;color:var(--ink-mid);">VO₂ max — cardiorespiratory fitness age</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border-light);">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+              <div style="font-size:14px;color:var(--ink-mid);">DEXA scan — body composition in detail</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border-light);">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+              <div style="font-size:14px;color:var(--ink-mid);">Strength &amp; power — 3 functional assessments</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border-light);">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+              <div style="font-size:14px;color:var(--ink-mid);">Spirometry + ECG + vitals</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border-light);">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+              <div style="font-size:14px;color:var(--ink-mid);">Blood panel — 40+ markers across 7 categories</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border-light);">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+              <div style="font-size:14px;color:var(--ink-mid);">Psychological well-being assessment</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border-light);">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+              <div style="font-size:14px;color:var(--ink-mid);">Full results report</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 0;">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+              <div style="font-size:14px;color:var(--ink-mid);">90-min educational group session</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section section-cream" id="how">
+  <div class="wrap">
+    <div class="s-tag">Your longevity screening day</div>
+    <h2 class="serif">One day. A complete picture.</h2>
+    <p class="intro-text">No repeat visits, no complicated process. Everything happens in a single experience.</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-badge">Before you arrive</div>
+        <h3>Book &amp; prepare</h3>
+        <p>Book online and complete a short health form. We send clear preparation instructions — fasting requirements, what to wear, what to expect. Singapore residents only, ages 18+.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-badge">~2 hours 40 minutes</div>
+        <h3>Your test day</h3>
+        <p>Come to our clinic at 10 Coleman Street. Our clinical team guides you through every test at your pace — VO₂ max, DEXA, blood draw, strength, spirometry, ECG, and more.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-badge">90 min · 6–10 participants</div>
+        <h3>Group session</h3>
+        <p>Attend an educational session with our clinical team. They walk through what each result means, what the research says about these markers, and what they suggest in terms of lifestyle priorities — so you leave knowing what to focus on next.</p>
+        <div class="step-note">This is an educational session — not a personal medical consultation. A private 1:1 doctor consultation is available as a separate add-on.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT WE MEASURE ── -->
+<section class="section section-white" id="tests">
+  <div class="wrap">
+    <div class="s-tag">How these tests reflect ageing</div>
+    <h2 class="serif">Four systems that decline<br>as you age — we measure all of them.</h2>
+    <p class="intro-text">As we age, four physiological systems decline in a predictable sequence. The rate of that decline determines how well — and how independently — you age. Each test in MORROW Insights measures one of these systems directly.</p>
+
+    <!-- 4 AGEING MARKERS -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px;">
+
+      <div class="domain-card" style="border-left:3px solid var(--teal);">
+        <div class="domain-icon">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+            <rect width="44" height="44" rx="10" fill="rgba(0,181,173,0.08)"/>
+            <path d="M10 28 Q13 18 16 22 Q19 26 22 14 Q25 2 28 20 Q31 28 34 24" stroke="#00B5AD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="22" cy="14" r="2" fill="#00B5AD"/>
+          </svg>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <div class="domain-tag">01 — VO₂ max</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">Declines first</div>
+        </div>
+        <h4>Cardiovascular fitness</h4>
+        <p>VO₂ max measures how efficiently your heart delivers oxygen and how well your muscles use it — your cardiovascular engine capacity. It naturally declines with age, and the research literature links lower VO₂ max to reduced cardiovascular reserve and diminished physiological resilience. †</p>
+        <div class="domain-tests">Simple explanation: A stronger engine means a younger biological profile.</div>
+      </div>
+
+      <div class="domain-card" style="border-left:3px solid var(--teal);">
+        <div class="domain-icon">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+            <rect width="44" height="44" rx="10" fill="rgba(0,181,173,0.08)"/>
+            <rect x="16" y="10" width="12" height="24" rx="6" stroke="#00B5AD" stroke-width="2"/>
+            <path d="M12 20 Q22 16 32 20" stroke="#00B5AD" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M12 24 Q22 28 32 24" stroke="#00B5AD" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <div class="domain-tag">02 — DEXA scan</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">Declines with age</div>
+        </div>
+        <h4>Muscle mass &amp; body composition</h4>
+        <p>Healthy ageing means preserving muscle and limiting the accumulation of visceral fat around organs. DEXA gives a precise picture of both — lean muscle mass, visceral fat, bone density, and left-to-right balance across your body.</p>
+        <div class="domain-tests">6 measurements · Involves low-dose X-ray · Not suitable during pregnancy or breastfeeding</div>
+      </div>
+
+      <div class="domain-card" style="border-left:3px solid var(--teal);">
+        <div class="domain-icon">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+            <rect width="44" height="44" rx="10" fill="rgba(0,181,173,0.08)"/>
+            <rect x="8" y="19" width="6" height="6" rx="2" fill="#00B5AD"/>
+            <rect x="30" y="19" width="6" height="6" rx="2" fill="#00B5AD"/>
+            <rect x="14" y="17" width="4" height="10" rx="2" fill="#00B5AD"/>
+            <rect x="26" y="17" width="4" height="10" rx="2" fill="#00B5AD"/>
+            <rect x="18" y="20" width="8" height="4" rx="2" fill="#00B5AD"/>
+          </svg>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <div class="domain-tag">03 — Strength &amp; power</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">Power declines faster than strength</div>
+        </div>
+        <h4>Functional reserve</h4>
+        <p>Strength shows how much reserve your body has. Power — the ability to generate force quickly — declines faster and is a key measure of functional capacity. Force plate jump test, isometric mid-thigh pull, and grip strength are widely used assessments in the research literature. ‡</p>
+        <div class="domain-tests">3 assessments</div>
+      </div>
+
+      <div class="domain-card" style="border-left:3px solid var(--teal);">
+        <div class="domain-icon">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+            <rect width="44" height="44" rx="10" fill="rgba(0,181,173,0.08)"/>
+            <path d="M22 12 L22 24" stroke="#00B5AD" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 18 Q14 18 12 22 Q10 26 12 30 Q14 34 18 32 Q20 31 22 28" stroke="#00B5AD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M22 18 Q30 18 32 22 Q34 26 32 30 Q30 34 26 32 Q24 31 22 28" stroke="#00B5AD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <div class="domain-tag">04 — Spirometry</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">Gradual decline over time</div>
+        </div>
+        <h4>Lung function</h4>
+        <p>Your lungs fuel everything else. Lung capacity gradually declines over time, and reduced lung function is associated with lower stamina and reduced physiological resilience. Spirometry measures how much air you can move and how efficiently your lungs work — combined with ECG and full vitals.</p>
+        <div class="domain-tests">7 measurements including ECG, BP, SpO₂</div>
+      </div>
+
+    </div>
+
+    <!-- SUPPORTING MEASURES -->
+    <div style="border-top:1px solid var(--border-light);padding-top:40px;">
+      <div class="s-tag" style="margin-bottom:16px;">Supporting measures</div>
+      <p style="font-size:14px;color:var(--muted);font-weight:300;max-width:640px;margin-bottom:24px;line-height:1.75;">Alongside the four ageing markers, MORROW Insights includes two further assessments that provide essential context for your overall health picture.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+        <div class="domain-card">
+          <div class="domain-icon">🩸</div>
+          <div class="domain-tag">Blood panel</div>
+          <h4>Metabolic &amp; organ health</h4>
+          <p>A broad blood panel across 7 health categories — glucose regulation, liver, kidney markers, lipids, inflammation, and nutritional status. Provides the metabolic context that sits behind your physical test results.</p>
+          <div class="domain-tests">40+ markers across 7 categories</div>
+        </div>
+
+        <div class="domain-card">
+          <div class="domain-icon">🧠</div>
+          <div class="domain-tag">Well-being assessment</div>
+          <h4>Psychological health</h4>
+          <p>Validated questionnaires assessing mental and emotional well-being factors that influence daily function, lifestyle capacity, and long-term health behaviours. Not a clinical mental health assessment.</p>
+          <div class="domain-tests">Not a clinical mental health assessment</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="margin-top:20px;font-size:11px;color:var(--muted);line-height:1.8;">† Kodama et al. (2009). Cardiorespiratory fitness as a quantitative predictor of all-cause mortality and cardiovascular events. <em>JAMA.</em> doi:10.1001/jama.2009.681<br>‡ Rantanen et al. (2003). Muscle strength after midlife as a predictor of disability in old age. <em>Archives of Internal Medicine.</em> doi:10.1001/archinte.163.16.1906</div>
+  </div>
+</section>
+
+<!-- ── BLOOD PANEL DETAIL ── -->
+<section class="section section-cream">
+  <div class="wrap">
+    <div class="blood-grid">
+      <div>
+        <div class="s-tag">The full blood panel</div>
+        <h2 class="serif">40+ blood markers.<br>Every one explained.</h2>
+        <p style="font-size:15px;color:var(--ink-mid);font-weight:300;line-height:1.8;margin-bottom:16px;">Your blood panel covers seven categories of health. Nothing gets buried — every marker is included in your results report and covered in your educational group session.</p>
+        <p style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.7;">Expand each category to see exactly what's measured.</p>
+      </div>
+      <div class="acc">
+        <div class="acc-item open">
+          <div class="acc-q" onclick="this.closest('.acc-item').classList.toggle('open')">
+            <div class="acc-q-left">
+              <span class="acc-q-label">Haematology</span>
+              <span class="acc-q-count">2 tests</span>
+            </div>
+            <svg class="acc-chevron" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+          </div>
+          <div class="acc-body">
+            <ul class="marker-list">
+              <li>Full blood count</li><li>Blood film</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.closest('.acc-item').classList.toggle('open')">
+            <div class="acc-q-left"><span class="acc-q-label">Glucose regulation</span><span class="acc-q-count">3 markers</span></div>
+            <svg class="acc-chevron" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+          </div>
+          <div class="acc-body"><ul class="marker-list"><li>HbA1c</li><li>Fasting glucose</li><li>Fasting insulin</li></ul></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.closest('.acc-item').classList.toggle('open')">
+            <div class="acc-q-left"><span class="acc-q-label">Kidney function</span><span class="acc-q-count">9 markers</span></div>
+            <svg class="acc-chevron" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+          </div>
+          <div class="acc-body"><ul class="marker-list"><li>eGFR</li><li>Urea</li><li>Creatinine</li><li>Na</li><li>K</li><li>Cl</li><li>Bicarbonate</li><li>Urine FEME</li><li>Urine ACR</li></ul><div class="acc-cite">These markers are for baseline monitoring purposes only. They do not diagnose kidney disease.</div></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.closest('.acc-item').classList.toggle('open')">
+            <div class="acc-q-left"><span class="acc-q-label">Liver function</span><span class="acc-q-count">10 markers</span></div>
+            <svg class="acc-chevron" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+          </div>
+          <div class="acc-body"><ul class="marker-list"><li>Total protein</li><li>Albumin</li><li>Globulin</li><li>A/G ratio</li><li>ALP</li><li>Total bilirubin</li><li>Direct bilirubin</li><li>AST</li><li>ALT</li><li>GGT</li></ul></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.closest('.acc-item').classList.toggle('open')">
+            <div class="acc-q-left"><span class="acc-q-label">Lipid profile</span><span class="acc-q-count">5 markers</span></div>
+            <svg class="acc-chevron" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+          </div>
+          <div class="acc-body"><ul class="marker-list"><li>Total cholesterol</li><li>LDL</li><li>HDL</li><li>Non-HDL</li><li>Triglycerides</li></ul></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.closest('.acc-item').classList.toggle('open')">
+            <div class="acc-q-left"><span class="acc-q-label">Inflammation</span><span class="acc-q-count">1 marker</span></div>
+            <svg class="acc-chevron" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+          </div>
+          <div class="acc-body"><ul class="marker-list"><li>Hs-CRP</li></ul></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.closest('.acc-item').classList.toggle('open')">
+            <div class="acc-q-left"><span class="acc-q-label">Nutritional status</span><span class="acc-q-count">5 markers</span></div>
+            <svg class="acc-chevron" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+          </div>
+          <div class="acc-body"><ul class="marker-list"><li>Ferritin</li><li>Iron</li><li>TIBC</li><li>Vitamin B12</li><li>Folate</li><li>Vitamin D</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL PROOF — PLACEHOLDER: replace with real authenticated testimonials before going live ── -->
+<!-- HSA §3.3(b): Testimonials must be genuine, authenticated (e.g. signed), current, and represent a typical experience. Supporting evidence must be available on request. DO NOT publish until real testimonials are collected. -->
+
+
+<!-- ── PRICING ── -->
+<section class="section section-cream" id="pricing">
+  <div class="wrap">
+    <div class="price-layout">
+      <div class="price-left">
+        <div class="s-tag">Your longevity investment</div>
+        <h2 class="serif">Everything you need.<br>One clear price.</h2>
+        <p>MORROW Insights is designed not as a one-off check, but as a meaningful starting point — a precise baseline of your physiological reserve across six domains, built to guide what to focus on next and to track how you progress over time.</p>
+        <ul class="price-points">
+          <li><div class="pp-dot"></div>40+ tests across 6 health domains</li>
+          <li><div class="pp-dot"></div>Full results report with every marker explained</li>
+          <li><div class="pp-dot"></div>90-min educational group session with clinical team</li>
+          <li><div class="pp-dot"></div>App access to track results over time</li>
+          <li><div class="pp-dot"></div>MOH-licensed clinic · 10 Coleman Street</li>
+        </ul>
+      </div>
+      <div>
+        <div class="big-card">
+          <div class="bc-tag">MORROW Insights</div>
+          <div class="bc-price">$599</div>
+          <div class="bc-gst">Singapore residents only</div>
+          <div class="bc-rows">
+            <div class="bc-row"><span class="bc-rl">Test day duration</span><span class="bc-rv">~2 hrs 40 min</span></div>
+            <div class="bc-row"><span class="bc-rl">Group session</span><span class="bc-rv">90 minutes</span></div>
+            <div class="bc-row"><span class="bc-rl">Results report</span><span class="bc-rv">Included</span></div>
+            <div class="bc-row"><span class="bc-rl">App access</span><span class="bc-rv">Included</span></div>
+            <div class="bc-row"><span class="bc-rl">1:1 doctor consult</span><span class="bc-rv" style="color:rgba(255,255,255,0.3);">Add-on</span></div>
+          </div>
+          <a href="/cdn-cgi/l/email-protection#5b383435353e382f1b36342929342c363e3f32383a3775283c" class="bc-btn">Book your screening</a>
+          <div class="bc-small">Ages 18–21 require parental consent · Terms and conditions apply</div>
+          <div class="permit-tag">HSA Permit No. [MAHP XXXXXXX]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ADD-ONS ── -->
+<section class="section section-white">
+  <div class="wrap">
+    <div class="addons-header">
+      <div class="s-tag" style="text-align:center;">Optional</div>
+      <h2 class="serif" style="text-align:center;">Want to go deeper?</h2>
+      <p style="text-align:center;font-size:14px;color:var(--muted);margin-top:8px;">Add-on panels are available if you want more detail in specific areas.</p>
+      <button class="addons-toggle-btn" onclick="toggleAddons(this)">View add-on panels ↓</button>
+    </div>
+    <div class="addons-body" id="addons-body">
+      <div class="addon-grid">
+        <div class="addon-card">
+          <div class="addon-name">Preventive Heart Panel</div>
+          <div class="addon-price">$499</div>
+          <div class="addon-consult">Includes 1:1 doctor consultation</div>
+          <div class="addon-desc">NT-proBNP, Homocysteine, ApoA1, ApoB, ApoB/ApoA1 ratio, Lp(a). For those with family history of cardiovascular conditions or who want greater depth beyond standard cholesterol testing.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-name">Preventive Brain Panel</div>
+          <div class="addon-price">$499</div>
+          <div class="addon-consult">Includes 1:1 doctor consultation</div>
+          <div class="addon-desc">Omega-3 Index, thyroid panel (TSH, FT4, FT3), Homocysteine, and cognitive baseline assessment. For those thinking long-term about cognitive health.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-name">Preventive Cancer Panel</div>
+          <div class="addon-price">$499</div>
+          <div class="addon-consult">Includes 1:1 doctor consultation</div>
+          <div class="addon-desc">Tumour markers (CEA, CA 19-9, AFP, PSA/CA 125) for longitudinal monitoring. Optional SPOT-MAS™ ctDNA test (+S$899) also available.</div>
+          <div class="cancer-warning">⚠ Tumour markers are not diagnostic for cancer and must not replace recommended cancer screening programmes. Results must be reviewed with a physician.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-name">Performance Panel</div>
+          <div class="addon-price">$899</div>
+          <div class="addon-consult">Includes 1:1 doctor consultation</div>
+          <div class="addon-desc">Testosterone, SHBG, IGF-1, thyroid, ApoB, ApoA1, Lp(a), CK, Homocysteine, zinc, selenium. For those optimising energy, training, and recovery.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-name">Preventive Bundle</div>
+          <div class="addon-price">$1,299</div>
+          <div class="addon-consult">Includes 1:1 doctor consultation · Heart + Brain + Cancer</div>
+          <div class="addon-desc">All three preventive panels combined. Cardiovascular, cognitive, and baseline cancer risk markers in one.</div>
+          <div class="cancer-warning">⚠ Includes tumour markers — see Cancer Panel note above.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-name">1:1 Doctor Consultation</div>
+          <div class="addon-price" style="font-size:16px;margin:8px 0 4px;color:var(--teal-dark);">Available separately</div>
+          <div class="addon-consult">45 min · After your group session</div>
+          <div class="addon-desc">Personal medical review of your results with a MORROW doctor. Available online or in-person once your group session is complete.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEAM ── -->
+<section class="section section-cream">
+  <div class="wrap">
+    <div class="team-intro-grid">
+      <div>
+        <div class="s-tag">Your longevity clinical team</div>
+        <h2 class="serif">Meet the team<br>behind your screening.</h2>
+        <p style="font-size:15px;color:var(--ink-mid);font-weight:300;line-height:1.8;margin-bottom:16px;">All tests are conducted by trained allied health professionals. Group sessions are led by our clinical team. 1:1 consultations are with our doctors.</p>
+        <p style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.75;">Our approach combines clinical medicine with evidence-based lifestyle practices — helping you understand what your results mean and what influences them.</p>
+      </div>
+      <div class="team-cards">
+        <div class="team-card">
+          <div class="team-avatar" style="background:none;overflow:hidden;"><img src="data:image/jpeg;base64,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" alt="Dr. Eva-Leina Yoosuff" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div>
+            <h4>Dr. Eva-Leina Yoosuff</h4>
+            <p>Medical doctor and certified health coach. 15+ years blending clinical expertise with evidence-based behavioural medicine.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:none;overflow:hidden;"><img src="data:image/jpeg;base64,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" alt="Dr. Ari Ali Sahebkashaf" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div>
+            <h4>Dr. Ari Ali Sahebkashaf</h4>
+            <p>Medical doctor with 10+ years in clinical and preventive health. Focused on lifestyle-based, evidence-driven care.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section section-white">
+  <div class="wrap">
+    <div class="faq-layout">
+      <div class="faq-left">
+        <div class="s-tag">Questions about longevity screening</div>
+        <h2 class="serif">Common questions</h2>
+        <p style="margin-top:12px;">Anything else? Email us at <a href="/cdn-cgi/l/email-protection#41222e2f2f242235012c2e33332e362c24252822202d6f3226" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="1675797878737562567b79646479617b73727f75777a386571">[email&#160;protected]</span></a></p>
+      </div>
+      <div>
+        <div class="faq-item open">
+          <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+            What exactly am I buying?
+            <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="faq-a">A longevity-focused health screening built to improve your healthspan — measuring how much physiological reserve your body has and guiding what to focus on next. In one visit (~2 hrs 40 mins), you complete 40+ tests covering cardiovascular fitness, body composition, strength and power, lung function, blood biomarkers, and psychological well-being. You then attend a 90-minute educational group session where the clinical team explains your results and what they mean for your health priorities. You receive a full results report. S$599. Singapore residents only.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+            Does the group session replace a doctor consultation?
+            <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="faq-a">No. The Educational Group Discussion is a structured educational session — not a medical consultation. It explains your results and the research behind each test. For a dedicated 1:1 review of your results with a doctor, that is available as a separate add-on after the group session.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+            How is this different from a regular health screening?
+            <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="faq-a">MORROW Insights is focused on improving your healthspan — built to guide what to do next, and to track progress over time. It measures physiological reserve across four systems that decline with age (cardiovascular fitness, muscle mass and composition, strength and power, lung function), alongside blood markers and psychological well-being. These tests provide a meaningful baseline for health monitoring, not a one-off snapshot.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+            Does this replace my GP?
+            <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="faq-a">No. MORROW Insights is designed to complement your existing healthcare. The detailed baseline we provide can be shared with your GP or specialist — most of what we measure isn't routinely tested. We flag anything that warrants further investigation.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+            Who is longevity screening for?
+            <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="faq-a">Singapore residents aged 18 and above. Those aged 18–21 require parent or guardian consent. Terms and conditions apply.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="section section-teal">
+  <div class="wrap">
+    <div class="final-inner">
+      <h2>Measure your reserve.<br>Guide what comes<br><em>next.</em></h2>
+      <div class="final-cta-col">
+        <a href="/cdn-cgi/l/email-protection#4f2c2021212a2c3b0f22203d3d2038222a2b262c2e23613c28" class="btn-white">Book your screening →</a>
+        <div class="final-sub">S$599 · 10 Coleman Street, Singapore</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DISCLAIMER ── -->
+<div class="disclaimer">
+  <p>MORROW Insights is a health awareness and monitoring service provided by Longevity &amp; Lifestyle Medical Pte. Ltd. It does not diagnose, treat, or manage any medical condition. Results should be reviewed alongside your existing healthcare. HSA Advertisement Permit No. [MAHP XXXXXXX]. All healthcare services are provided by Longevity &amp; Lifestyle Medical Pte. Ltd. (MOH Licence: L/25M0780/MDS/001/252), operating under the brand "MORROW Medical".</p>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-in">
+    <div class="footer-grid">
+      <div class="fb">
+        <div class="fb-logo"><img src="data:image/jpeg;base64,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" alt="MORROW Medical" style="height:24px;width:auto;filter:brightness(0) invert(1);opacity:0.7;display:block;margin-bottom:10px;"></div>
+        <p>10 Coleman Street, #03-01, Singapore 179809<br>Mon–Fri · 8:30am–5:30pm<br><a href="/cdn-cgi/l/email-protection#0f6c6061616a6c7b4f62607d7d6078626a6b666c6e63217c68" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="8be8e4e5e5eee8ffcbe6e4f9f9e4fce6eeefe2e8eae7a5f8ec">[email&#160;protected]</span></a><br><br>Longevity &amp; Lifestyle Medical Pte. Ltd.<br>MOH Licence: L/25M0780/MDS/001/252</p>
+      </div>
+      <div class="fc">
+        <h5>Longevity screening</h5>
+        <ul>
+          <li><a href="#">MORROW Insights</a></li>
+          <li><a href="#">Add-on Panels</a></li>
+          <li><a href="#">1:1 Consultation</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#b5d6dadbdbd0d6c1f5d8dac7c7dac2d8d0d1dcd6d4d99bc6d2">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Privacy Statement</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="https://morrowmedical.sg" target="_blank">morrowmedical.sg ↗</a></li>
+          <li><a href="https://morrow.health" target="_blank">morrow.health ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">All healthcare services are provided by Longevity &amp; Lifestyle Medical Pte. Ltd., which operates under the brand "MORROW Medical", licensed by the Ministry of Health under the Healthcare Services Act 2020 (Licence No. L/25M0780/MDS/001/252). MORROW Insights is a health awareness and monitoring service. It does not diagnose, treat, or manage any medical condition. HSA Advertisement Permit No. [MAHP XXXXXXX]. © 2026 Longevity &amp; Lifestyle Medical Pte. Ltd. All rights reserved.<
